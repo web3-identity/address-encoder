@@ -5,6 +5,7 @@ const {
   fromWords: bech32FromWords,
   toWords: bech32ToWords
 } = bech32;
+
 import bigInt from 'big-integer';
 import { blake2b, blake2bHex } from 'blakejs';
 import { decode as bs58DecodeNoCheck, encode as bs58EncodeNoCheck } from 'bs58';
@@ -39,6 +40,9 @@ import { ChainID, isValidAddress } from './flow/index';
 import { groestl_2 }  from './groestl-hash-js/index';
 import { xmrAddressDecoder, xmrAddressEncoder } from './monero/xmr-base58';
 import { nimqDecoder, nimqEncoder } from './nimq';
+import {decode as cfxDecode, encode as cfxEncode} from '@conflux-dev/conflux-address-js';
+
+
 const SLIP44_MSB = 0x80000000
 type EnCoder = (data: Buffer) => string;
 type DeCoder = (data: string) => Buffer;
@@ -1430,6 +1434,14 @@ function siaAddressDecoder(data: string): Buffer {
   return hash;
 }
 
+function cfxAddressEncoder(data: Buffer): string {
+  return cfxEncode(data,1029)
+}
+
+function cfxAddressDecoder(data: string): Buffer {
+  return cfxDecode(data).hexAddress;
+}
+
 const getConfig = (name: string, coinType: number, encoder: EnCoder, decoder: DeCoder) => {
   return {
     coinType,
@@ -1512,6 +1524,7 @@ export const formats: IFormat[] = [
   bitcoinBase58Chain('CCA', 489, [[0x0b]], [[0x05]]),
   hexChecksumChain('THETA_LEGACY', 500),
   getConfig('SOL', 501, bs58EncodeNoCheck, bs58DecodeNoCheck),
+  getConfig('CFX', 503, cfxAddressEncoder, cfxAddressDecoder),
   getConfig('XHV', 535, xmrAddressEncoder, xmrAddressDecoder),
   getConfig('FLOW', 539, flowEncode, flowDecode),
   bech32Chain('IRIS', 566, 'iaa'),

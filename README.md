@@ -14,13 +14,13 @@ For example, cointype of ARB1 is 2147441487(`0x80000000 | 42161`).
 ### Using NPM
 
 ```
-npm install --save @ensdomains/address-encoder
+npm install --save @web3identity/address-encoder
 ```
 
 ## Usage
 
 ```
-import { formatsByName, formatsByCoinType } from '@ensdomains/address-encoder';
+import { formatsByName, formatsByCoinType } from '@web3identity/address-encoder';
 
 const data = formatsByName['BTC'].decoder('1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa');
 console.log(data.toString('hex')); // 76a91462e907b15cbf27d5425399ebf6f0fb50ebb88f1888ac
@@ -155,6 +155,7 @@ This library currently supports the following cryptocurrencies and address forma
  - ZEL (transparent addresses: base58check P2PKH and P2SH, and Sapling shielded payment addresses: bech32; doesn't support Sprout shielded payment addresses)
  - ZEN (base58 check)
  - ZIL (bech32)
+ - CFX (base32)
 
 
 ## Development guide
