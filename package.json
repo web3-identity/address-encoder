@@ -1,6 +1,6 @@
 {
-  "name": "@ensdomains/address-encoder",
-  "version": "0.2.18",
+  "name": "@web3identity/address-encoder",
+  "version": "0.2.19",
   "description": "Encodes and decodes address formats for various cryptocurrencies",
   "source": "src/index.ts",
   "main": "lib/index.js",
@@ -42,6 +42,7 @@
     "typescript": "^3.8.2"
   },
   "dependencies": {
+    "@conflux-dev/conflux-address-js": "https://github.com/zctocm/conflux-address-js",
     "bech32": "^2.0.0",
     "blakejs": "^1.1.0",
     "bn.js": "^4.11.8",
